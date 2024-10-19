@@ -1,0 +1,54 @@
+<main>
+  <section>
+    <div></div>
+    <div class="sidePokemons">
+      <div class="headerSidePokemon">
+        <h2>Mis Pokemons</h2>
+        <button>
+          <img src="icons/edit.svg" />
+          <span>Editar</span>
+        </button>
+      </div>
+
+      <div class="pokemonsContainer">
+        @for (pokemon of accountService.getPokemonsStorage(); track $index) {
+        <div class="cardPokemon">
+          <div class="generalInfo">
+            <img class="" src={{pokemon.sprites.other.home.front_default}}>
+            <div>
+              <p class="titlePokemon">{{pokemon.name}}</p>
+              <p>{{pokemon.types | typePokemon}}</p>
+            </div>
+          </div>
+          <div class="stats">
+            <table>
+              <tbody>
+                <tr>
+                  <td>HP</td>
+                  <td><app-bar-stats [statsCurrent]="pokemon.stats[0]" [color]="colors[$index]"></app-bar-stats></td>
+                </tr>
+                <tr>
+                  <td>Ataque</td>
+                  <td><app-bar-stats [statsCurrent]="pokemon.stats[1]" [color]="colors[$index]"></app-bar-stats></td>
+                </tr>
+                <tr>
+                  <td>Defensa</td>
+                  <td><app-bar-stats [statsCurrent]="pokemon.stats[2]" [color]="colors[$index]"></app-bar-stats></td>
+                </tr>
+                <tr>
+                  <td>Ataque Especial</td>
+                  <td><app-bar-stats [statsCurrent]="pokemon.stats[3]" [color]="colors[$index]"></app-bar-stats></td>
+                </tr>
+                <tr>
+                  <td>Defensa Especial</td>
+                  <td><app-bar-stats [statsCurrent]="pokemon.stats[4]" [color]="colors[$index]"></app-bar-stats></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+</main>
