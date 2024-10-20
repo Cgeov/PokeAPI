@@ -1,7 +1,8 @@
-export interface Account{
-  photo: string,
-  name: string,
-  hobbie: string,
-  birthday: string,
-  identification: string,
+export interface Account {
+  photo: string | null;
+  name: string | null;
+  hobby: string | null;
+  birthday: string | null;
+  identification: string | null;
+  age: number
 }

@@ -1,0 +1,37 @@
+<div class="photoSide">
+  @if(accountService.getAccountStorage()?.name){
+    <p class="nameTitle">{{accountService.getAccountStorage()?.name}}</p>
+  }@else {
+    <h2>Imágen perfil</h2>
+  }
+
+  <div class="imageContainer">
+    @if (imageSelected) {
+    <div class="photoExist">
+      <img src="{{imageSelected}}">
+    </div>
+    }@else {
+    <div class="photoNonExist">
+      <img class="imageDefault" src="icons/user.svg">
+    </div>
+    }
+  </div>
+
+  <div class="infoContainer">
+    <p>Pasatiempo:</p>
+    <p>{{accountService.getAccountStorage()?.hobby}}</p>
+    <p>Edad:</p>
+    <p>{{accountService.getAccountStorage()?.age}}</p>
+    <p>Idetificación:</p>
+    <p>{{accountService.getAccountStorage()?.identification}}</p>
+  </div>
+
+  <div class="dropZone" (drop)="drop($event)" (dragover)="dragOver($event)" (dragleave)="dragLeave($event)">
+    <span>Adjunta un foto</span>
+    <img src="icons/cloud.svg">
+  </div>
+
+
+
+
+</div>

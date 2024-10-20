@@ -1,0 +1,80 @@
+.photoSide {
+  background-color: var(--secondary-color);
+  border-radius: 50px;
+  padding: 30px 50px;
+  .nameTitle{
+    font-size: x-large;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .imageContainer {
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+
+    .photoNonExist {
+      background-color: var(--gray-color-40);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .photoExist {
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+  }
+
+  .dropZone{
+    margin-top: 50px;
+    border: 1px dashed var(--primary-color-40);
+    background-color: white;
+    border-radius: 10px;
+    padding-block: 15px;
+    width: 100%;
+    padding-inline: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: smaller;
+    color: var(--primary-color-30);
+  }
+
+  .infoContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    p:nth-child(odd){
+      font-weight: bold;
+      color: #4B4B4B;
+    }
+    p:nth-child(even){
+      text-align: right;
+      color: #4B4B4B;
+    }
+  }
+}

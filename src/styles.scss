@@ -28,6 +28,7 @@
   --gray-color-40: #E7EFF5;
   --secondary-color: #FFC600;
   --neutral-color-10: #F2F2F2;
+  --neutral-color-20: #E6E6E6;
   --neutral-color-40: #868686;
   --neutral-color-50: #454545;
 }
@@ -54,4 +55,15 @@ input, select{
 ::-webkit-scrollbar-thumb {
   background: var(--neutral-color-40);
   border-radius: 10px;
+}
+
+
+.container{
+  width: 80%;
+  max-width: 1000px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding-bottom: 80px;
 }

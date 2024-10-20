@@ -3,11 +3,12 @@ import { AccountService } from '../../shared/services/account.service';
 import { BarStatsComponent } from './components/bar-stats/bar-stats.component';
 import { HttpClient } from '@angular/common/http';
 import { TypePokemonPipe } from '../../shared/pipes/type-pokemon.pipe';
+import { ProfileCardComponent } from "../../shared/components/profile-card/profile-card.component";
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [BarStatsComponent, TypePokemonPipe],
+  imports: [BarStatsComponent, TypePokemonPipe, ProfileCardComponent],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })

@@ -1,12 +1,4 @@
-section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 80%;
-  max-width: 1200px;
-  margin-inline: auto;
-
-  .pokemonSelectionContainer{
+  .pokemonSelectionContainer {
     button[type=submit] {
       background-color: var(--primary-color);
       outline: none;
@@ -21,16 +13,16 @@ section{
       margin-top: 20px;
     }
 
-    .searchContainer{
+    .searchContainer {
       position: relative;
 
-      img{
+      img {
         position: absolute;
         top: 9px;
         left: 5px;
       }
 
-      input{
+      input {
         padding-inline: 35px;
         padding-block: 10px;
         background-color: var(--neutral-color-10);
@@ -41,7 +33,7 @@ section{
       }
     }
 
-    .pokemonsContainer{
+    .pokemonsContainer {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       column-gap: 30px;
@@ -49,7 +41,8 @@ section{
       margin-top: 20px;
       overflow-y: auto;
       overflow-x: hidden;
-      .cardPokemon{
+
+      .cardPokemon {
         position: relative;
         background-color: var(--neutral-color-10);
         margin-top: 50px;
@@ -59,12 +52,14 @@ section{
         cursor: pointer;
         width: 170px;
         min-width: 170px;
-        img{
+
+        img {
           transform: translateY(-50px);
           width: 100px;
           height: 100px;
         }
-        .info{
+
+        .info {
           font-size: small;
           background-color: var(--primary-color);
           color: white;
@@ -79,15 +74,15 @@ section{
           transform: translateY(-30px);
         }
       }
+
       .cardPokemon.disableSelection {
         filter: opacity(0.5);
         cursor: auto;
       }
+
       .cardPokemon.selectedPokemon {
         background-color: var(--secondary-color);
       }
 
     }
   }
-}
-

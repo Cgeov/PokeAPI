@@ -3,11 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Pokemon } from '../../models/pokemon.interface';
 import { Router } from '@angular/router';
 import { AccountService } from '../../shared/services/account.service';
+import { ProfileCardComponent } from "../../shared/components/profile-card/profile-card.component";
 
 @Component({
   selector: 'app-selection',
   standalone: true,
-  imports: [],
+  imports: [ProfileCardComponent],
   templateUrl: './selection.component.html',
   styleUrl: './selection.component.scss',
 })

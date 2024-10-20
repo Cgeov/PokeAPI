@@ -1,28 +1,6 @@
 <main>
-  <section>
-    <div class="photoSide">
-      <h2>Imágen perfil</h2>
-      <div class="imageContainer">
-        @if (true) {
-        <div class="photoExist">
-          <img
-            src="https://s3-alpha-sig.figma.com/img/832e/e833/cf61454857d6074f5e1ac2df74892c8f?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=puN2Nn-xIYZqdoEtnW9Gj-p1kcwObxGN8baMuqDOOgGGUdtCCfBPX7QP-gi1u4Rlz-sjhlLXTg~Cu1vCi8iZisUDikmE4tWXHsQNE9JbbruaYKOPQ-5EDjT4Azl3ZSY2v02-ZEgA6qfKhwEHKUVTUNx3GU754VDn7apg1WNnwDpfD81VDIIYrKTzHivuwKxjo5xHAUBMCB0ssmgaiTbfPSxV6MA4rI4bR4h19malnGkPhbXqQ6OBHA-YxInwmDVL0~3l3QFkjnbprnXaGdwFrDIgErvXJP5v0TOTsrt9-z-JDMQtoMrD1tZV2L-2VehgFjD0cjkquoWI5VIVsy67gA__">
-        </div>
-
-        }@else {
-        <div class="photoContainer">
-          <img class="imageDefault" src="icons/user.svg">
-        </div>
-        }
-      </div>
-
-      <div class="dropZone">
-        <span>Adjunta un foto</span>
-        <img src="icons/cloud.svg">
-      </div>
-
-
-    </div>
+  <section class="container">
+    <app-profile-card></app-profile-card>
     <div class="pokemonSelectionContainer">
       <h2>Pokémon</h2>
       <p>Selecciona 3 Pokémon para que sean parte de tu equipo</p>

@@ -5,44 +5,25 @@
   </div>
 
 
-  <section>
-    <div class="photoSide">
-      <h2>Imágen perfil</h2>
-      <div class="imageContainer">
-        @if (true) {
-        <div class="photoExist">
-          <img
-            src="https://s3-alpha-sig.figma.com/img/832e/e833/cf61454857d6074f5e1ac2df74892c8f?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=puN2Nn-xIYZqdoEtnW9Gj-p1kcwObxGN8baMuqDOOgGGUdtCCfBPX7QP-gi1u4Rlz-sjhlLXTg~Cu1vCi8iZisUDikmE4tWXHsQNE9JbbruaYKOPQ-5EDjT4Azl3ZSY2v02-ZEgA6qfKhwEHKUVTUNx3GU754VDn7apg1WNnwDpfD81VDIIYrKTzHivuwKxjo5xHAUBMCB0ssmgaiTbfPSxV6MA4rI4bR4h19malnGkPhbXqQ6OBHA-YxInwmDVL0~3l3QFkjnbprnXaGdwFrDIgErvXJP5v0TOTsrt9-z-JDMQtoMrD1tZV2L-2VehgFjD0cjkquoWI5VIVsy67gA__">
-        </div>
-
-        }@else {
-        <div class="photoContainer">
-          <img class="imageDefault" src="icons/user.svg">
-        </div>
-        }
-      </div>
-
-      <div class="dropZone">
-        <span>Adjunta un foto</span>
-        <img src="icons/cloud.svg">
-      </div>
-
-
-    </div>
+  <section class="container">
+    <app-profile-card (imageResult)="resultImage($event)"></app-profile-card>
 
     <div class="formSide">
       <h2>Tu información</h2>
       <p>Completa la siguiente información para completar tu perfil</p>
 
-      <form>
+      <form [formGroup]="configurationsForm">
         <div class="inputContainer">
-          <label>Nombre*</label>
-          <input type="text" />
+          <label [ngClass]="{
+            'isValid': configurationsForm.get('name')?.valid,
+            'isInValid': configurationsForm.get('name')?.invalid && configurationsForm.get('name')?.value?.length! > 0
+          }">Nombre*</label>
+          <input type="text" name="name" formControlName="name" placeholder="Nombre*" />
         </div>
 
         <div class="inputContainer">
-          <label>Pasatiempo favorito</label>
-          <select name="hobby" id="hobby">
+          <label [class.isValid]="configurationsForm.get('hobby')?.valid">Pasatiempo favorito</label>
+          <select name="hobby" formControlName="hobby">
             <option value="" disabled selected>Pasatiempo Favorito</option>
             <option value="futbol">Jugar Futbol</option>
             <option value="basketball">Jugar Basketball</option>
@@ -52,23 +33,29 @@
         </div>
 
         <div class="inputContainer">
-          <label>Cumpleaños*</label>
-          <input type="date" />
+          <label [class.isValid]="configurationsForm.get('birthday')?.valid">Cumpleaños*</label>
+          <input type="date" name="birthday" formControlName="birthday" (input)="handleDate($event)" />
         </div>
 
-        @if (true) {
+        @if (isAdult) {
         <div class="inputContainer">
-          <label>Documento*</label>
-          <input type="text" />
+          <label [ngClass]="{
+            'isValid': configurationsForm.get('identification')?.valid,
+            'isInValid': configurationsForm.get('identification')?.invalid && configurationsForm.get('identification')?.value?.length! > 0
+          }">Documento*</label>
+          <input type="text" [mask]="'00000000-0'" name="identification"
+            formControlName="identification" placeholder="Documento*" />
         </div>
         }@else {
+        @if (ageValid) {
         <div class="inputContainer">
-          <label>Carnet de Minoridad</label>
-          <input type="text" />
+          <label [class.isValid]="configurationsForm.get('identification')?.valid">Carnet de Minoridad</label>
+          <input type="text" name="identification" formControlName="identification" placeholder="Carnet de Minoridad" />
         </div>
         }
+        }
 
-        <button type="submit">Continuar</button>
+        <input (click)="setAccountInfo()" [disabled]="configurationsForm.invalid || !image" type="submit" value="Continuar" />
       </form>
     </div>
   </section>
