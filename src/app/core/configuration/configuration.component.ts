@@ -109,6 +109,6 @@ export class ConfigurationComponent implements OnInit{
     setTimeout(() => {
       this.loaderService.hideLoading();
       this.router.navigate(['selection']);
-    }, 1000);
+    }, 700);
   }
 }

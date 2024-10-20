@@ -43,6 +43,10 @@ select {
   outline: none;
 }
 
+h1,h2,h3,h4{
+  margin: 0;
+}
+
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -64,7 +68,7 @@ select {
   margin-inline: auto;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
   gap: 30px
 }
 

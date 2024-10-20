@@ -1,4 +1,4 @@
-<main>
+<div>
   <app-title-header></app-title-header>
   <section class="container">
     <app-profile-card></app-profile-card>
@@ -8,21 +8,37 @@
 
       <div class="searchContainer">
         <img src="icons/search.svg">
-        <input (input)="searchPokemon($event)" placeholder="Buscar por índice, nombre..."/>
+        <input (input)="searchPokemon($event)" placeholder="Buscar por índice, nombre..." />
       </div>
 
-      <div class="pokemonsContainer">
+
+      <cdk-virtual-scroll-viewport itemSize="100%" class="scrollContainer">
+        <div class="pokemonsContainer">
+          <div *cdkVirtualFor="let pokemon of pokemons; let i = index;" class="cardPokemon"
+            [class.selectedPokemon]="pokemon.selected" [class.disableSelection]="!pokemon.selected && disableSelection"
+            (click)="selectPokemon(pokemon.id)">
+            <img [src]="pokemon.sprites.other.home.front_default">
+            <div class="info">
+              <span>{{ pokemon.id }}</span>
+              <span>{{ pokemon.name }}</span>
+            </div>
+          </div>
+        </div>
+      </cdk-virtual-scroll-viewport>
+
+
+      <!-- <div class="pokemonsContainer">
         @for (pokemon of pokemons; track $index) {
           <div class="cardPokemon" [class.selectedPokemon]="pokemon.selected" [class.disableSelection]="!pokemon.selected && disableSelection" (click)="selectPokemon(pokemon.id)">
             <img src={{pokemon.sprites.other.home.front_default}}>
             <div class="info"><span>{{pokemon.id}}</span><span>{{pokemon.name}}</span></div>
           </div>
         }
-      </div>
+      </div> -->
 
-      <input (click)="savePokemons()" [disabled]="!disableSelection" type="submit" value="Guardar"/>
+      <input (click)="savePokemons()" [disabled]="!disableSelection" type="submit" value="Guardar" />
 
 
     </div>
   </section>
-</main>
+</div>

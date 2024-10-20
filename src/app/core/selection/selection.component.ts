@@ -6,12 +6,13 @@ import { AccountService } from '../../shared/services/account.service';
 import { ProfileCardComponent } from '../../shared/components/profile-card/profile-card.component';
 import { LoadingService } from '../../shared/services/loading.service';
 import { forkJoin } from 'rxjs';
-import { TitleHeaderComponent } from "../../shared/components/title-header/title-header.component";
+import { TitleHeaderComponent } from '../../shared/components/title-header/title-header.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-selection',
   standalone: true,
-  imports: [ProfileCardComponent, TitleHeaderComponent],
+  imports: [ProfileCardComponent, TitleHeaderComponent, ScrollingModule],
   templateUrl: './selection.component.html',
   styleUrl: './selection.component.scss',
 })
@@ -74,7 +75,7 @@ export class SelectionComponent implements OnInit {
         }
       });
       this.disableSelection = true;
-      this.pokemonsBackup = JSON.parse(JSON.stringify(this.pokemons))
+      this.pokemonsBackup = JSON.parse(JSON.stringify(this.pokemons));
     }
   }
 
@@ -126,6 +127,6 @@ export class SelectionComponent implements OnInit {
     setTimeout(() => {
       this.loaderService.hideLoading();
       this.router.navigate(['summary']);
-    }, 1000);
+    }, 700);
   }
 }
