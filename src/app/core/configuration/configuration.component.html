@@ -1,9 +1,5 @@
 <main>
-  <div class="headerSection">
-    <h1><img src="icons/arrow_back.svg"><span>¡Hola!</span> Configuremos tu perfil</h1>
-    <p class="subtitle">Queremos conocerte mejor.</p>
-  </div>
-
+  <app-title-header></app-title-header>
 
   <section class="container">
     <app-profile-card (imageResult)="resultImage($event)"></app-profile-card>
@@ -34,7 +30,7 @@
 
         <div class="inputContainer">
           <label [class.isValid]="configurationsForm.get('birthday')?.valid">Cumpleaños*</label>
-          <input type="date" name="birthday" formControlName="birthday" (input)="handleDate($event)" />
+          <input type="date" name="birthday" formControlName="birthday" (input)="handleDate($event.target)" />
         </div>
 
         @if (isAdult) {

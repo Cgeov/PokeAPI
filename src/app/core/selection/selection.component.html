@@ -1,4 +1,5 @@
 <main>
+  <app-title-header></app-title-header>
   <section class="container">
     <app-profile-card></app-profile-card>
     <div class="pokemonSelectionContainer">
@@ -19,7 +20,7 @@
         }
       </div>
 
-      <button (click)="savePokemons()" [disabled]="!disableSelection" type="submit">Guardar</button>
+      <input (click)="savePokemons()" [disabled]="!disableSelection" type="submit" value="Guardar"/>
 
 
     </div>

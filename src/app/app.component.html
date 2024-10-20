@@ -1,7 +1,10 @@
-<app-navbar></app-navbar>
-<router-outlet />
-@if (loadingService.loadingStatus()) {
-<div class="loadingOverlay">
-  <div><img src="images/loading.gif"></div>
-</div>
-}
+<main>
+  <app-navbar></app-navbar>
+  <router-outlet />
+  @if (loadingService.loadingStatus()) {
+  <div class="loadingOverlay">
+    <div><img src="images/loading.gif"></div>
+  </div>
+  }
+
+</main>

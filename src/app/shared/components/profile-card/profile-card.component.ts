@@ -1,5 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-card',
@@ -10,12 +11,15 @@ import { AccountService } from '../../services/account.service';
 })
 export class ProfileCardComponent implements OnInit{
   @Output() imageResult = new EventEmitter<string | null>();
-
   public accountService = inject(AccountService);
-
+  protected router = inject(Router)
+  editable: boolean = false;
+  dragged: boolean = false;
   imageSelected: string | null = null
 
   ngOnInit(): void {
+    this.router.url == '/configuration' ? this.editable = true : this.editable = false
+
     const accountData = this.accountService.getAccountStorage()
     if(accountData){
       this.imageSelected = accountData.photo;
@@ -25,14 +29,17 @@ export class ProfileCardComponent implements OnInit{
 
   dragOver(e: DragEvent) {
     e.preventDefault();
+    this.dragged = true;
   }
 
   dragLeave(e: DragEvent) {
     e.preventDefault();
+    this.dragged = false;
   }
 
   drop(e: DragEvent) {
     e.preventDefault();
+    this.dragged = false;
     if (e.dataTransfer?.files && e.dataTransfer.files.length) {
       const reader = new FileReader();
 
@@ -42,5 +49,10 @@ export class ProfileCardComponent implements OnInit{
         this.imageResult.emit(reader.result!.toString())
       };
     }
+  }
+
+  removeImage(){
+    this.imageResult.emit(null);
+    this.imageSelected = "";
   }
 }

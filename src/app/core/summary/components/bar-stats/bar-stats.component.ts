@@ -47,7 +47,6 @@ export class BarStatsComponent implements OnInit {
     const typeStat = this.stats.find(
       (stat) => stat.type == this.statsCurrent.stat.name
     );
-    console.log(typeStat);
 
     if (typeStat) {
       this.progress = (this.statsCurrent.base_stat / typeStat.maxValue) * 100;

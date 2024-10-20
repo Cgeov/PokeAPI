@@ -6,11 +6,12 @@ import { AccountService } from '../../shared/services/account.service';
 import { ProfileCardComponent } from '../../shared/components/profile-card/profile-card.component';
 import { LoadingService } from '../../shared/services/loading.service';
 import { forkJoin } from 'rxjs';
+import { TitleHeaderComponent } from "../../shared/components/title-header/title-header.component";
 
 @Component({
   selector: 'app-selection',
   standalone: true,
-  imports: [ProfileCardComponent],
+  imports: [ProfileCardComponent, TitleHeaderComponent],
   templateUrl: './selection.component.html',
   styleUrl: './selection.component.scss',
 })
@@ -46,6 +47,7 @@ export class SelectionComponent implements OnInit {
             next: (pokemonsInfo: any) => {
               this.pokemons = pokemonsInfo;
               this.pokemonsBackup = JSON.parse(JSON.stringify(this.pokemons));
+              this.getCurrentSelectedPokemons();
             },
             error: (error: Error) => {
               console.log('ERROR --->', error);
@@ -58,6 +60,22 @@ export class SelectionComponent implements OnInit {
         },
         complete: () => {},
       });
+  }
+
+  getCurrentSelectedPokemons() {
+    const pokemonsSelected = this.accountService.getPokemonsStorage();
+    if (pokemonsSelected) {
+      this.pokemonsSelected = pokemonsSelected;
+
+      this.pokemonsSelected.forEach((pokemon: Pokemon) => {
+        const indexPokemon = pokemon.id;
+        if (this.pokemons[indexPokemon]) {
+          this.pokemons[indexPokemon - 1].selected = true;
+        }
+      });
+      this.disableSelection = true;
+      this.pokemonsBackup = JSON.parse(JSON.stringify(this.pokemons))
+    }
   }
 
   selectPokemon(idPokemon: number): void {
@@ -85,7 +103,6 @@ export class SelectionComponent implements OnInit {
         this.pokemons[indexPokemon].selected = false;
         this.disableSelection = false;
       }
-      console.log(this.pokemonsSelected);
     } else {
       console.error(`Pokémon with ID ${idPokemon} not found.`);
     }

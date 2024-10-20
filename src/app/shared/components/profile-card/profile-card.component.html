@@ -1,8 +1,15 @@
-<div class="photoSide">
-  @if(accountService.getAccountStorage()?.name){
-    <p class="nameTitle">{{accountService.getAccountStorage()?.name}}</p>
+<div class="photoSide" [style]="router.url !== '/configuration' ? 'margin-top: 100px' : ''">
+  @if(accountService.getAccountStorage()?.name && router.url != '/configuration'){
+  @if(router.url == '/summary'){
+  <div class="medalTitle">
+    <span>Entrenador</span>
+    <img src="icons/medal.svg" />
+  </div>
   }@else {
-    <h2>Imágen perfil</h2>
+  <p class="nameTitle">{{accountService.getAccountStorage()?.name}}</p>
+  }
+  }@else {
+  <h2>Imágen perfil</h2>
   }
 
   <div class="imageContainer">
@@ -17,19 +24,29 @@
     }
   </div>
 
+  @if (editable) {
+  <div class="dropZone" [class.dragged]="dragged" (drop)="drop($event)" (dragover)="dragOver($event)"
+    (dragleave)="dragLeave($event)">
+    <span>{{dragged ? 'Suelta la foto' :'Adjunta un foto'}}</span>
+    @if(!this.imageSelected){
+    <img src="icons/cloud.svg">
+    }@else {
+    <img (click)="removeImage()" src="icons/trash_can.svg">
+    }
+  </div>
+  }@else {
   <div class="infoContainer">
     <p>Pasatiempo:</p>
     <p>{{accountService.getAccountStorage()?.hobby}}</p>
     <p>Edad:</p>
-    <p>{{accountService.getAccountStorage()?.age}}</p>
+    <p>{{accountService.getAccountStorage()?.age}} año(s)</p>
+    @if (accountService.getAccountStorage() && accountService.getAccountStorage()?.identification !== null &&
+    accountService.getAccountStorage()?.identification?.replace('/\s/g', "")) {
     <p>Idetificación:</p>
     <p>{{accountService.getAccountStorage()?.identification}}</p>
+    }
   </div>
-
-  <div class="dropZone" (drop)="drop($event)" (dragover)="dragOver($event)" (dragleave)="dragLeave($event)">
-    <span>Adjunta un foto</span>
-    <img src="icons/cloud.svg">
-  </div>
+  }
 
 
 

@@ -13,4 +13,9 @@ export const routes: Routes = [
     path: 'summary',
     loadComponent: () => import('./core/summary/summary.component').then((m) => m.SummaryComponent),
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'configuration'
+  }
 ];

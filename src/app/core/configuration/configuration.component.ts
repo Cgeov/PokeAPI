@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProfileCardComponent } from '../../shared/components/profile-card/profile-card.component';
 import {
   FormControl,
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AccountService } from '../../shared/services/account.service';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../shared/services/loading.service';
+import { TitleHeaderComponent } from "../../shared/components/title-header/title-header.component";
 
 @Component({
   selector: 'app-configuration',
@@ -23,11 +24,12 @@ import { LoadingService } from '../../shared/services/loading.service';
     NgxMaskDirective,
     NgxMaskPipe,
     CommonModule,
-  ],
+    TitleHeaderComponent
+],
   templateUrl: './configuration.component.html',
   styleUrl: './configuration.component.scss',
 })
-export class ConfigurationComponent {
+export class ConfigurationComponent implements OnInit{
   private accountService = inject(AccountService);
   private router = inject(Router);
   private loaderService = inject(LoadingService);
@@ -44,9 +46,20 @@ export class ConfigurationComponent {
     identification: new FormControl(''),
   });
 
-  handleDate(e: Event): void {
-    const target = e.target as HTMLInputElement;
-    const value = target.value;
+  ngOnInit(): void {
+    const accountData = this.accountService.getAccountStorage()
+    if(accountData){
+      const {age,photo, ...rest} = accountData
+      this.configurationsForm.setValue(rest);
+      this.age = age;
+      this.image = photo;
+
+      this.handleDate( {value: rest.birthday})
+    }
+  }
+
+  handleDate(e: any): void {
+    const value = e.value;
 
     const dateBirthday = new Date(value);
     const dateNow = new Date();
@@ -82,7 +95,6 @@ export class ConfigurationComponent {
   }
 
   setAccountInfo(): void {
-    console.log('pressed');
     this.accountService.updateAccountStorage({
       name: this.configurationsForm.get('name')?.value!,
       hobby: this.configurationsForm.get('hobby')?.value!,

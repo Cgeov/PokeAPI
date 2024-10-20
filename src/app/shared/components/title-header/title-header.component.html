@@ -1,0 +1,13 @@
+<section class="headerSection">
+  <div>
+    <img src="icons/arrow_back.svg"/>
+    <div [innerHTML]="titleSelected.title"></div>
+    @if(router.url === '/summary'){
+      <button [routerLink]="'/configuration'">
+        <img src="icons/edit.svg" />
+        <span>Editar Perfil</span>
+      </button>
+    }
+  </div>
+  <p class="subtitle" [innerHTML]="titleSelected.subtitle"></p>
+</section>

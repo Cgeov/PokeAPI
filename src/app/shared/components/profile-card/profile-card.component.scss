@@ -2,6 +2,20 @@
   background-color: var(--secondary-color);
   border-radius: 50px;
   padding: 30px 50px;
+  .medalTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #4B4B4B;
+    font-size: larger;
+    margin-bottom: 20px;
+
+    img{
+      width: 40px;
+      height: 40px;
+    }
+  }
   .nameTitle{
     font-size: x-large;
     font-weight: bold;
@@ -69,6 +83,7 @@
   .infoContainer{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 30px;
     p:nth-child(odd){
       font-weight: bold;
       color: #4B4B4B;

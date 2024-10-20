@@ -1,110 +1,78 @@
-main {
-  .headerSection {
-    width: 80%;
-    margin-top: 50px;
-    margin-inline: auto;
+.formSide {
+  form {
+    .inputContainer {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      margin-bottom: 35px;
 
-    h1 {
-      img {
-        margin-right: 10px;
+      label {
+        position: absolute;
+        visibility: hidden;
+        top: -10px;
+        left: 20px;
+        background-color: white;
       }
 
-      font-weight: 400;
-      margin: 0;
-      color: var(--primary-color);
-
-      span {
-        font-weight: bold;
-      }
-    }
-
-    p {
-      margin-left: 20px;
-    }
-  }
-
-  p.subtitle {
-    color: var(--neutral-color-40);
-    margin: 0;
-  }
-
-  .formSide {
-    form {
-      .inputContainer {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        margin-bottom: 35px;
-
-        label {
-          position: absolute;
-          visibility: hidden;
-          top: -10px;
-          left: 20px;
-          background-color: white;
-        }
-
-        label.isInValid{
-          visibility: visible;
-          color: red;
-        }
-
-
-        label.isValid{
-          visibility: visible;
-          color: var(--primary-color);
-        }
-
-        input {
-          height: 20px;
-        }
-
-        input,
-        select {
-          padding-top: 15px;
-          padding-bottom: 10px;
-          border: 1px solid var(--neutral-color-40);
-          border-radius: 10px;
-          padding-inline: 20px;
-          color: var(--neutral-color-50);
-        }
-
-        select option {
-          background-color: white;
-          color: var(--primary-color);
-        }
-
-        select option:hover {
-          background-color: var(--gray-color-40);
-        }
+      label.isInValid {
+        visibility: visible;
+        color: red;
       }
 
-      input.valid,
-      select.valid {
-        border: 1px solid var(--primary-color);
+
+      label.isValid {
+        visibility: visible;
+        color: var(--primary-color);
       }
 
-      input[type=submit] {
-        background-color: var(--primary-color);
-        outline: none;
-        border: 0;
-        color: white;
+      input {
+        height: 20px;
+      }
+
+      input,
+      select {
+        padding-top: 15px;
+        padding-bottom: 10px;
+        border: 1px solid var(--neutral-color-40);
         border-radius: 10px;
-        padding-block: 10px;
-        padding-inline: 60px;
-        cursor: pointer;
-        width: min-content;
-        margin-inline: auto;
+        padding-inline: 20px;
+        color: var(--neutral-color-50);
       }
 
-      input[type=submit]:disabled {
-        background-color: var(--neutral-color-20);
-        color: var(--neutral-color-40);
-        font-weight: 600;
-        cursor: auto;
+      select option {
+        background-color: white;
+        color: var(--primary-color);
+      }
+
+      select option:hover {
+        background-color: var(--gray-color-40);
+      }
     }
 
+    input.valid,
+    select.valid {
+      border: 1px solid var(--primary-color);
     }
+
+    input[type=submit] {
+      background-color: var(--primary-color);
+      outline: none;
+      border: 0;
+      color: white;
+      border-radius: 10px;
+      padding-block: 10px;
+      padding-inline: 60px;
+      cursor: pointer;
+      width: min-content;
+      margin-inline: auto;
+    }
+
+    input[type=submit]:disabled {
+      background-color: var(--neutral-color-20);
+      color: var(--neutral-color-40);
+      font-weight: 600;
+      cursor: auto;
+    }
+
   }
-
 }

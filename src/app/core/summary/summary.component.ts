@@ -4,11 +4,13 @@ import { BarStatsComponent } from './components/bar-stats/bar-stats.component';
 import { HttpClient } from '@angular/common/http';
 import { TypePokemonPipe } from '../../shared/pipes/type-pokemon.pipe';
 import { ProfileCardComponent } from "../../shared/components/profile-card/profile-card.component";
+import { RouterModule } from '@angular/router';
+import { TitleHeaderComponent } from "../../shared/components/title-header/title-header.component";
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [BarStatsComponent, TypePokemonPipe, ProfileCardComponent],
+  imports: [BarStatsComponent, TypePokemonPipe, ProfileCardComponent, RouterModule, TitleHeaderComponent],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })

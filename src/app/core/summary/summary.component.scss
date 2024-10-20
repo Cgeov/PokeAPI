@@ -20,10 +20,14 @@ div.sidePokemons {
       color: var(--primary-color);
       display: flex;
       align-items: center;
+      font-weight: bold;
+      padding-inline: 20px;
+      cursor: pointer;
 
       img {
         width: 20px;
         height: 20px;
+        margin-right: 20px;
       }
     }
   }

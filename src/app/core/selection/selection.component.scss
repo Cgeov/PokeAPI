@@ -1,5 +1,5 @@
   .pokemonSelectionContainer {
-    button[type=submit] {
+    input[type=submit] {
       background-color: var(--primary-color);
       outline: none;
       border: 0;
@@ -12,6 +12,13 @@
       margin-inline: auto;
       margin-top: 20px;
     }
+
+    input[type=submit]:disabled {
+      background-color: var(--neutral-color-20);
+      color: var(--neutral-color-40);
+      font-weight: 600;
+      cursor: auto;
+  }
 
     .searchContainer {
       position: relative;
