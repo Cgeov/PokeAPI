@@ -7,7 +7,7 @@
 
       <div class="searchContainer">
         <img src="icons/search.svg">
-        <input placeholder="Buscar por índice, nombre..."/>
+        <input (input)="searchPokemon($event)" placeholder="Buscar por índice, nombre..."/>
       </div>
 
       <div class="pokemonsContainer">

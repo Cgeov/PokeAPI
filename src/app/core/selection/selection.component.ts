@@ -3,7 +3,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Pokemon } from '../../models/pokemon.interface';
 import { Router } from '@angular/router';
 import { AccountService } from '../../shared/services/account.service';
-import { ProfileCardComponent } from "../../shared/components/profile-card/profile-card.component";
+import { ProfileCardComponent } from '../../shared/components/profile-card/profile-card.component';
+import { LoadingService } from '../../shared/services/loading.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-selection',
@@ -15,44 +17,56 @@ import { ProfileCardComponent } from "../../shared/components/profile-card/profi
 export class SelectionComponent implements OnInit {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private accountService = inject(AccountService)
+  private accountService = inject(AccountService);
+  private loaderService = inject(LoadingService);
 
   pokemons: Array<Pokemon> = [];
+  pokemonsBackup: Array<Pokemon> = [];
   pokemonsSelected: Array<Pokemon> = [];
   disableSelection: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    const generalSubscription = this.http
+    this.getPokemons();
+  }
+
+  async getPokemons() {
+    const generalSubscription = await this.http
       .get<any>('https://pokeapi.co/api/v2/pokemon?limit=18')
       .subscribe({
-        next: (result) => {
-          console.log(result);
+        next: async (result) => {
           generalSubscription.unsubscribe();
-          result.results.map(async (pokemon: any) => {
-            const pokemonSubcription = await this.http
-              .get<any>(pokemon.url)
-              .subscribe({
-                next: (pokemonInfo: Pokemon) => {
-                  console.log(pokemonInfo);
-                  this.pokemons.push(pokemonInfo);
-                },
-                error: (error) => {
-                  console.log('ERROR --->', error);
-                },
-                complete: () => {
-                  pokemonSubcription.unsubscribe();
-                },
-              });
+
+          const pokemonRequests = result.results.map((pokemon: any) =>
+            this.http.get<Pokemon>(pokemon.url)
+          );
+
+          forkJoin(pokemonRequests).subscribe({
+            next: (pokemonsInfo: any) => {
+              this.pokemons = pokemonsInfo;
+              this.pokemonsBackup = JSON.parse(JSON.stringify(this.pokemons));
+            },
+            error: (error: Error) => {
+              console.log('ERROR --->', error);
+            },
+            complete: () => {},
           });
         },
+        error: (error) => {
+          console.log('ERROR-->', error);
+        },
+        complete: () => {},
       });
   }
 
   selectPokemon(idPokemon: number): void {
-    const indexPokemonSelected = this.pokemonsSelected.findIndex((pokemon: Pokemon) => pokemon.id === idPokemon);
-    const indexPokemon = this.pokemons.findIndex((pokemon: Pokemon) => pokemon.id === idPokemon);
+    const indexPokemonSelected = this.pokemonsSelected.findIndex(
+      (pokemon: Pokemon) => pokemon.id === idPokemon
+    );
+    const indexPokemon = this.pokemons.findIndex(
+      (pokemon: Pokemon) => pokemon.id === idPokemon
+    );
 
     if (indexPokemon !== -1) {
       if (indexPokemonSelected === -1) {
@@ -60,11 +74,11 @@ export class SelectionComponent implements OnInit {
           this.pokemonsSelected.push(this.pokemons[indexPokemon]);
           this.pokemons[indexPokemon].selected = true;
 
-          if(this.pokemonsSelected.length == 3){
+          if (this.pokemonsSelected.length == 3) {
             this.disableSelection = true;
           }
         } else {
-          console.warn("Maximum of 3 Pokémon can be selected.");
+          console.warn('Maximum of 3 Pokémon can be selected.');
         }
       } else {
         this.pokemonsSelected.splice(indexPokemonSelected, 1);
@@ -75,12 +89,26 @@ export class SelectionComponent implements OnInit {
     } else {
       console.error(`Pokémon with ID ${idPokemon} not found.`);
     }
-
-
   }
 
-  savePokemons():void{
-    this.accountService.updatePokemonsStorage(this.pokemonsSelected)
-    this.router.navigate(['summary'])
+  searchPokemon(e: Event): void {
+    const target = e.target as HTMLInputElement;
+    const value = target.value;
+    this.pokemons = this.pokemonsBackup.filter(
+      (pokemon: Pokemon) =>
+        pokemon.id.toString().includes(value) ||
+        pokemon.name.toLowerCase().includes(value)
+    );
+  }
+
+  savePokemons(): void {
+    this.accountService.updatePokemonsStorage(this.pokemonsSelected);
+
+    this.loaderService.showLoading();
+
+    setTimeout(() => {
+      this.loaderService.hideLoading();
+      this.router.navigate(['summary']);
+    }, 1000);
   }
 }

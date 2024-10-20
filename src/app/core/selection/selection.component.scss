@@ -28,7 +28,7 @@
         background-color: var(--neutral-color-10);
         border: none;
         height: 20px;
-        width: 100%;
+        width: calc(100% - 70px);
         border-radius: 10px;
       }
     }
@@ -84,5 +84,24 @@
         background-color: var(--secondary-color);
       }
 
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .pokemonSelectionContainer {
+      .pokemonsContainer {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .pokemonSelectionContainer {
+      .pokemonsContainer {
+        grid-template-columns: 1fr;
+      }
+      .cardPokemon{
+        margin-inline: auto;
+      }
     }
   }

@@ -2,6 +2,7 @@ div.sidePokemons {
   .pokemonsContainer {
     height: 560px;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .headerSidePokemon {

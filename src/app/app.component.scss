@@ -1,0 +1,14 @@
+.loadingOverlay{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 60px;
+  z-index: 10000;
+  background-color: white;
+  div{
+
+  }
+}

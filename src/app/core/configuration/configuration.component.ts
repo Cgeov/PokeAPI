@@ -11,6 +11,7 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { AccountService } from '../../shared/services/account.service';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../shared/services/loading.service';
 
 @Component({
   selector: 'app-configuration',
@@ -29,11 +30,12 @@ import { Router } from '@angular/router';
 export class ConfigurationComponent {
   private accountService = inject(AccountService);
   private router = inject(Router);
+  private loaderService = inject(LoadingService);
 
   image: string | null = null;
   ageValid: boolean = true;
   isAdult: boolean = true;
-  age: number = 0
+  age: number = 0;
 
   configurationsForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -87,8 +89,14 @@ export class ConfigurationComponent {
       birthday: this.configurationsForm.get('birthday')?.value!,
       identification: this.configurationsForm.get('identification')?.value!,
       photo: this.image,
-      age: this.age
+      age: this.age,
     });
-    this.router.navigate(['selection']);
+
+    this.loaderService.showLoading();
+
+    setTimeout(() => {
+      this.loaderService.hideLoading();
+      this.router.navigate(['selection']);
+    }, 1000);
   }
 }
