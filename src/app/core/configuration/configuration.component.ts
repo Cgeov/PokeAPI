@@ -30,15 +30,19 @@ import { TitleHeaderComponent } from "../../shared/components/title-header/title
   styleUrl: './configuration.component.scss',
 })
 export class ConfigurationComponent implements OnInit{
+  //Importing Services
   private accountService = inject(AccountService);
   private router = inject(Router);
   private loaderService = inject(LoadingService);
 
+  //Variable creation
   image: string | null = null;
   ageValid: boolean = true;
   isAdult: boolean = true;
   age: number = 0;
 
+
+  //Form variable creation
   configurationsForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     hobby: new FormControl('', [Validators.required]),
@@ -47,6 +51,7 @@ export class ConfigurationComponent implements OnInit{
   });
 
   ngOnInit(): void {
+    //If the account exists, we will set the values in the form
     const accountData = this.accountService.getAccountStorage()
     if(accountData){
       const {age,photo, ...rest} = accountData
@@ -58,15 +63,19 @@ export class ConfigurationComponent implements OnInit{
     }
   }
 
+  //Function to determine if the person is an adult or not
   handleDate(e: any): void {
     const value = e.value;
 
     const dateBirthday = new Date(value);
     const dateNow = new Date();
 
+    //Getting the age by subtracting the selected year from the current year in the calendar
     this.age = dateNow.getFullYear() - dateBirthday.getFullYear();
 
     const identificationControl = this.configurationsForm.get('identification');
+
+    //If the age is greater than 18 years, then validations for the DUI will be applied
     if (this.age >= 18) {
       this.isAdult = true;
       identificationControl!.setValidators([
@@ -75,11 +84,15 @@ export class ConfigurationComponent implements OnInit{
       ]);
       identificationControl!.updateValueAndValidity();
     } else {
+      //Otherwise, there will be no validations on the identification field.
       this.isAdult = false;
       identificationControl!.clearValidators();
       identificationControl!.updateValueAndValidity();
     }
 
+    /*If the selected date is greater than the current date,
+    the identification field will be hidden,
+    and the continue button will be disabled.*/
     if (dateBirthday > dateNow) {
       this.ageValid = false;
       this.configurationsForm.get('identification')?.setValue('');
@@ -90,10 +103,12 @@ export class ConfigurationComponent implements OnInit{
     }
   }
 
+  //Function to set the @Output result in a variable.
   resultImage(image: any): void {
     this.image = image;
   }
 
+  //Set all the configured items within the signals of the service.
   setAccountInfo(): void {
     this.accountService.updateAccountStorage({
       name: this.configurationsForm.get('name')?.value!,
@@ -104,8 +119,8 @@ export class ConfigurationComponent implements OnInit{
       age: this.age,
     });
 
+    //Waiting 700ms for the loading screen
     this.loaderService.showLoading();
-
     setTimeout(() => {
       this.loaderService.hideLoading();
       this.router.navigate(['selection']);

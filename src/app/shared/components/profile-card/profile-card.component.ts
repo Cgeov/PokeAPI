@@ -10,14 +10,18 @@ import { Router } from '@angular/router';
   styleUrl: './profile-card.component.scss',
 })
 export class ProfileCardComponent implements OnInit{
+  //Importing Services
   @Output() imageResult = new EventEmitter<string | null>();
   public accountService = inject(AccountService);
   protected router = inject(Router)
+
+  //Variable creation
   editable: boolean = false;
   dragged: boolean = false;
   imageSelected: string | null = null
 
   ngOnInit(): void {
+    //If an image is previously saved in the service, it will be stored in a variable.
     this.router.url == '/configuration' ? this.editable = true : this.editable = false
 
     const accountData = this.accountService.getAccountStorage()
@@ -26,17 +30,20 @@ export class ProfileCardComponent implements OnInit{
     }
   }
 
-
+  //Detects events when an element is hovered over.
   dragOver(e: DragEvent) {
     e.preventDefault();
     this.dragged = true;
   }
 
+  //Detects events when an element is hovered over.
   dragLeave(e: DragEvent) {
     e.preventDefault();
     this.dragged = false;
   }
 
+  /*When a document is dropped, it will be processed,
+  converted to base64, and returned to the parent component */
   drop(e: DragEvent) {
     e.preventDefault();
     this.dragged = false;
@@ -51,7 +58,8 @@ export class ProfileCardComponent implements OnInit{
     }
   }
 
-  removeImage(){
+  //Function to remove the image
+  removeImage():void{
     this.imageResult.emit(null);
     this.imageSelected = "";
   }

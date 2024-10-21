@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './bar-stats.component.scss',
 })
 export class BarStatsComponent implements OnInit {
+  //Variable creation
   @Input() statsCurrent: stats = { base_stat: 0, stat: { name: '', url: '' } };
   @Input() color: string = 'red';
 
@@ -48,6 +49,8 @@ export class BarStatsComponent implements OnInit {
       (stat) => stat.type == this.statsCurrent.stat.name
     );
 
+    /* If stat exists, we calculate the progress percentage
+    based on the current base stat and the maximum value of the stat. */
     if (typeStat) {
       this.progress = (this.statsCurrent.base_stat / typeStat.maxValue) * 100;
     }

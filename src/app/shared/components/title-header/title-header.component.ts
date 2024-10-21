@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 import { CommonModule } from '@angular/common';
@@ -10,11 +10,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './title-header.component.html',
   styleUrl: './title-header.component.scss',
 })
-export class TitleHeaderComponent implements OnInit {
+export class TitleHeaderComponent{
+  //Importing Services
   protected router = inject(Router);
   protected titleSelected: any = {};
   private accountService = inject(AccountService);
 
+  //Variable creation
   titles: any = {
     configuration: {
       title: '<h1>¡Hola!</h1> <span>Configuremos tu perfil</span>',
@@ -31,12 +33,9 @@ export class TitleHeaderComponent implements OnInit {
         .at(0)}!<span> `,
     },
   };
+
+  //We get the current path.
   constructor(){
     this.titleSelected = this.titles[this.router.url.split('/')[1]];
-    console.log(this.titleSelected)
-  }
-
-  ngOnInit(): void {
-
   }
 }
