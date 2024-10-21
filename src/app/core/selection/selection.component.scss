@@ -1,4 +1,12 @@
   .pokemonSelectionContainer {
+    h2{
+      font-weight: 400;
+      color: var(--primary-color);
+    }
+    p{
+      color: var(--neutral-color-40);
+      margin: 0 0 20px 0;
+    }
     input[type=submit] {
       background-color: var(--primary-color);
       outline: none;
@@ -37,13 +45,15 @@
         height: 20px;
         width: calc(100% - 70px);
         border-radius: 10px;
+        font-weight: bold;
+        color: var(--neutral-color-40);
       }
     }
 
     .scrollContainer {
       height: 450px;
       overflow-x: hidden;
-      min-width: 550px;
+      min-width: 570px;
       .pokemonsContainer {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

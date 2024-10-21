@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { informationGuard } from './shared/guards/information.guard';
 
 export const routes: Routes = [
   {
@@ -8,10 +9,12 @@ export const routes: Routes = [
   {
     path: 'selection',
     loadComponent: () => import('./core/selection/selection.component').then((m) => m.SelectionComponent),
+    canActivate: [informationGuard]
   },
   {
     path: 'summary',
     loadComponent: () => import('./core/summary/summary.component').then((m) => m.SummaryComponent),
+    canActivate: [informationGuard]
   },
   {
     path: '',

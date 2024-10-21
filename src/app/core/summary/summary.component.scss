@@ -1,6 +1,6 @@
 div.sidePokemons {
   .pokemonsContainer {
-    height: 560px;
+    height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -10,6 +10,7 @@ div.sidePokemons {
     justify-content: space-between;
     align-items: center;
     color: var(--primary-color);
+    margin-bottom: 20px;
 
     button {
       background-color: transparent;

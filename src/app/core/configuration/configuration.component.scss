@@ -1,4 +1,16 @@
+.containerConfig{
+  justify-content: space-around;
+}
 .formSide {
+  max-width: 300px;
+  h2{
+    font-weight: 400;
+    color: var(--primary-color);
+  }
+  p{
+    color: var(--neutral-color-40);
+    margin: 0 0 20px 0;
+  }
   form {
     .inputContainer {
       display: flex;
@@ -74,5 +86,12 @@
       cursor: auto;
     }
 
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  .formSide {
+    max-width: none;
   }
 }

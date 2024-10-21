@@ -1,4 +1,4 @@
-<div class="photoSide" [style]="router.url !== '/configuration' ? 'margin-top: 100px' : ''">
+<div class="photoSide" [style]="router.url == '/selection' ? 'margin-top: 50px' : '10px'">
   @if(accountService.getAccountStorage()?.name && router.url != '/configuration'){
   @if(router.url == '/summary'){
   <div class="medalTitle">
