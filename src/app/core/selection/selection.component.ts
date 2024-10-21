@@ -122,6 +122,7 @@ export class SelectionComponent implements OnInit {
     } else {
       console.error(`Pokémon with ID ${idPokemon} not found.`);
     }
+    this.pokemonsBackup = JSON.parse(JSON.stringify(this.pokemons));
   }
 
   //Function to search for a Pokémon by its ID or name
