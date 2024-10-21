@@ -27,15 +27,15 @@ PokeApp is an application that allows users to explore information about Pokémo
 ```bash
    cd PokeAPI
  ```
-2. Install Angular CLI
+3. Install Angular CLI
    ```bash
    npm install -g @angular/cli
    ```
-3. Install dependencies
+4. Install dependencies
    ```bash
    npm install
    ```
-4. Start the development server
+5. Start the development server
    ```bash
    ng serve
    ```
